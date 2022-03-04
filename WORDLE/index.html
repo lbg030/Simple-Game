@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WORDLE게임</title>
+  </head>
+  <body>
+    <style>
+      input {
+        width: 50px;
+        height: 50px;
+        font-size: 40px;
+        text-align: center;
+      }
+    </style>
+
+    <h1>WORDLE게임</h1>
+    <h3>⭐️입력한 알파벳이 정답에 포함되고 위치가 맞으면 초록색</h3>
+    <h3>⭐️입력한 알파벳이 정답에 포함되지만 위치가 다르면 노랑색</h3>
+    <h3>⭐️입력한 알파벳이 정답에 포함되지않으면 회색</h3>
+    <h4>💥tab 누르면 쉽게 다음 칸 가능</h4>
+    <input class="input" autofocus maxlength="1" />
+    <input class="input" maxlength="1" />
+    <input class="input" maxlength="1" />
+    <input class="input" maxlength="1" />
+    <input class="input" maxlength="1" />
+    <input class="input" maxlength="1" />
+    <button>제출</button>
+
+    <script>
+      var 답 = "wordle";
+      document.querySelector("button").addEventListener("click", function () {
+        var input = document.querySelectorAll(".input");
+
+        for (let i = 0; i < 6; i++) {
+          if (input[i].value == 답[i]) {
+            // 위치까지 맞으면 초록
+            input[i].style.background = "green";
+          } else if (input[i].value == "") {
+            // 공백이면 회색
+            input[i].style.background = "grey";
+          } else if (답.includes(input[i].value)) {
+            // 위치는 안맞으면 노랑
+            input[i].style.background = "yellow";
+          } else {
+            // 다 안맞으면 연한 회색
+            input[i].style.background = "lightgrey";
+          }
+          input[i].classList.remove("input");
+        }
+
+        var template = `<div>
+          <input class="input"  autofocus maxlength="1" />
+          <input class="input"  maxlength="1" />
+          <input class="input"  maxlength="1" />
+          <input class="input"  maxlength="1" />
+          <input class="input"  maxlength="1" />
+          <input class="input"  maxlength="1" />
+        </div>`;
+        document
+          .querySelector("body")
+          .insertAdjacentHTML("beforeend", template);
+      });
+    </script>
+  </body>
+</html>
