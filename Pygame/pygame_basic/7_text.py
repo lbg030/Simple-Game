@@ -9,6 +9,9 @@ screen = pygame.display.set_mode((screen_width, screen_height)) # 480 * 640
 #FPS
 clock = pygame.time.Clock()
 
+#화면 타이틀 설정
+pygame.display.set_caption("Nado Game") #게임 이름
+
 #배경 이미지 불러오기
 background = pygame.image.load("/Users/ibyeong-gwon/Desktop/Git/Simple-Game/Pygame/pygame_basic/pixel.jpg")
 
@@ -39,8 +42,7 @@ enemy_x_pos = screen_width / 2 - ( enemy_width / 2)# 화면 가로의 절반 크
 enemy_y_pos = screen_height / 2 - (enemy_height / 2 ) # 화면 세로 크기 가장 아래에 해당하는 위치 ( 세로 )
 
 
-#화면 타이틀 설정
-pygame.display.set_caption("Nado Game") #게임 이름
+
 
 # 폰트 정의
 game_font = pygame.font.Font(None, 40) # 폰트 객체 생성 ( 폰트, 크기)
