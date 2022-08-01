@@ -33,6 +33,15 @@ to_y = 0
 # 이동 속도
 character_speed = 0.5
 
+# 적 enemy 캐릭터
+enemy = pygame.image.load("/Users/ibyeong-gwon/Desktop/Git/Simple-Game/Pygame/pygame_basic/enemy.png")
+enemy_size = enemy.get_rect().size #이미지의 크기를 구해옴
+enemy_width = enemy_size[0] # 캐릭터 가로 크기
+enemy_height = enemy_size[1] # 캐릭터 세로 크기
+enemy_x_pos = screen_width / 2 - ( enemy_width / 2)# 화면 가로의 절반 크기에 해당하는 곳에 위치 ( 가로 )
+enemy_y_pos = screen_height / 2 - (enemy_height / 2 ) # 화면 세로 크기 가장 아래에 해당하는 위치 ( 세로 )
+
+
 #화면 타이틀 설정
 pygame.display.set_caption("Nado Game") #게임 이름
 
@@ -81,11 +90,24 @@ while running :
     elif character_y_pos > screen_height - character_height:
         character_y_pos = screen_height - character_height
     
+    #충돌 처리를 위한 rect 정보 업데이트
+    character_rect = character.get_rect()
+    character_rect.left = character_x_pos # rect정보 업데이트
+    character_rect.top = character_y_pos
+    
+    enemy_rect = enemy.get_rect()
+    enemy_rect.left = enemy_x_pos
+    enemy_rect.top = enemy_y_pos
+    
+    # 충돌 체크
+    if character_rect.colliderect(enemy_rect):
+        print("충돌했어요")
+        running = False
+        
     # screen.fill((0,0,255)) #RGB 형태로 단색 배경을 채우는 코드
     screen.blit(background, (0,0)) # x,y 좌표가 0,0 // 배경 그리기
-    
-    
-    screen.blit(character, (character_x_pos, character_y_pos))
+    screen.blit(character, (character_x_pos, character_y_pos)) #캐릭터 크리기
+    screen.blit(enemy, (enemy_x_pos, enemy_y_pos)) # 적 그리기
     
     pygame.display.update() #게임 화면을 다시 그리기 ! (반드시 계속 호출 되어야 되는 부분)
     
