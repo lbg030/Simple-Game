@@ -5,26 +5,29 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         
         self.sprites = []
+        self.Lsprites = []
         
+        self.direction = True
         self.is_animating = False
         
-        self.sprites.append(pygame.image.load('newWalk_01.png'))
-        self.sprites.append(pygame.image.load('newWalk_02.png'))
-        self.sprites.append(pygame.image.load('newWalk_03.png'))
-        self.sprites.append(pygame.image.load('newWalk_04.png'))
-        self.sprites.append(pygame.image.load('newWalk_05.png'))
-        self.sprites.append(pygame.image.load('newWalk_06.png'))
-        self.sprites.append(pygame.image.load('newWalk_07.png'))
-        self.sprites.append(pygame.image.load('newWalk_08.png'))
-        self.sprites.append(pygame.image.load('newWalk_09.png'))
-        self.sprites.append(pygame.image.load('newWalk_10.png'))
+        self.sprites.append(pygame.image.load('메인남캐_Move_01.gif'))
+        self.sprites.append(pygame.image.load('메인남캐_Move_02.gif'))
+        self.sprites.append(pygame.image.load('메인남캐_Move_03.gif'))
+        self.sprites.append(pygame.image.load('메인남캐_Move_04.gif'))
+        self.sprites.append(pygame.image.load('메인남캐_Move_05.gif'))
+        self.sprites.append(pygame.image.load('메인남캐_Move_06.gif'))
         
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
         
         self.rect = self.image.get_rect()
+        
         self.rect.topleft = [pos_x, pos_y]
-    
+        
+        # R_SQUIR_IMG = pygame.transform.flip(L_SQUIR_IMG,True,False)
+        for i in (self.sprites):
+            self.Lsprites.append(pygame.transform.flip(i, True, False))    
+        
     def animate(self):
         self.is_animating = True
     
@@ -33,19 +36,23 @@ class Player(pygame.sprite.Sprite):
         
     def update(self):
         if self.is_animating == True:
-            self.current_sprite += 0.2
+            if self.direction == True:   
+               self.image = self.Lsprites[int(self.current_sprite)]
             
+            else:   
+                
+                self.image = self.sprites[int(self.current_sprite)]
+            self.current_sprite += 0.2
+                
             if self.current_sprite >= len(self.sprites):
                 self.current_sprite = 0
                 
-            self.image = self.sprites[int(self.current_sprite)]
-            
 pygame.init()
 clock = pygame.time.Clock()
 
 screen_width = 1280 # 가로
 screen_height = 720 # 세로
-screen = pygame.display.set_mode((screen_width, screen_height)) # 480 * 640
+screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("testing game")
 
 moving_sprites = pygame.sprite.Group()
@@ -63,8 +70,14 @@ while running :
             running = False
             
         if event.type == pygame.KEYDOWN:
-            player.animate()
-        
+            if event.key == pygame.K_RIGHT:
+                player.direction = True
+                player.animate()
+                
+            elif event.key == pygame.K_LEFT:
+                player.direction = False
+                player.animate()
+                
         if event.type == pygame.KEYUP:
             player.unanimate()
             
