@@ -78,8 +78,8 @@ class Car:
             # 점프 한 상태에서 다시 점프를 위한 값
 
             # 이 코드를 주석처리하면 이중점프를 못한다.
-            if self.isJump == 2:
-                self.v = VELOCITY
+            # if self.isJump == 2:
+            #     self.v = VELOCITY
 
  
 
