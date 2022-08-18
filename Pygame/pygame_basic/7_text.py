@@ -114,7 +114,7 @@ while running :
         
     # screen.fill((0,0,255)) #RGB 형태로 단색 배경을 채우는 코드
     screen.blit(background, (0,0)) # x,y 좌표가 0,0 // 배경 그리기
-    screen.blit(character, (character_x_pos, character_y_pos)) #캐릭터 크리기
+    screen.blit(character, (character_x_pos, character_y_pos)) # 캐릭터 크리기
     screen.blit(enemy, (enemy_x_pos, enemy_y_pos)) # 적 그리기
     
     # 타이머 집어 넣기
